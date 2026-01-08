@@ -1,0 +1,150 @@
+/* MonthDecor - Estilos base */
+.month-decor-particle {
+  position: absolute;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+/* Contenedor de partículas */
+.month-decor-container {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Animaciones */
+@keyframes month-decor-fall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(var(--month-decor-start-rotate, 0deg));
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--month-decor-opacity, 0.7);
+  }
+  90% {
+    opacity: var(--month-decor-opacity, 0.7);
+  }
+  100% {
+    transform: translateY(110vh) translateX(var(--month-decor-sway, 20px)) 
+              rotate(calc(var(--month-decor-start-rotate, 0deg) + 180deg));
+    opacity: 0;
+  }
+}
+
+@keyframes month-decor-float {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(var(--month-decor-start-rotate, 0deg));
+    opacity: 0;
+  }
+  20% {
+    opacity: var(--month-decor-opacity, 0.7);
+  }
+  80% {
+    opacity: var(--month-decor-opacity, 0.7);
+  }
+  50% {
+    transform: translateY(-40px) translateX(calc(var(--month-decor-sway, 20px) / 2)) 
+              rotate(calc(var(--month-decor-start-rotate, 0deg) + 45deg));
+  }
+  100% {
+    transform: translateY(110vh) translateX(var(--month-decor-sway, 20px)) 
+              rotate(calc(var(--month-decor-start-rotate, 0deg) + 90deg));
+    opacity: 0;
+  }
+}
+
+@keyframes month-decor-spin-fall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(var(--month-decor-start-rotate, 0deg));
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--month-decor-opacity, 0.7);
+  }
+  90% {
+    opacity: var(--month-decor-opacity, 0.7);
+  }
+  100% {
+    transform: translateY(110vh) translateX(var(--month-decor-sway, 20px)) 
+              rotate(calc(var(--month-decor-start-rotate, 0deg) + 720deg));
+    opacity: 0;
+  }
+}
+
+/* Clases de animación */
+.month-decor-fall {
+  animation-name: month-decor-fall;
+  animation-duration: var(--month-decor-duration, 10s);
+  animation-delay: var(--month-decor-delay, 0s);
+}
+
+.month-decor-float {
+  animation-name: month-decor-float;
+  animation-duration: var(--month-decor-duration, 15s);
+  animation-delay: var(--month-decor-delay, 0s);
+}
+
+.month-decor-spin-fall {
+  animation-name: month-decor-spin-fall;
+  animation-duration: var(--month-decor-duration, 12s);
+  animation-delay: var(--month-decor-delay, 0s);
+}
+
+/* Estilos para los SVG */
+.month-decor-particle svg {
+  width: 100%;
+  height: 100%;
+  color: var(--month-decor-color, currentColor);
+  filter: 
+    drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))
+    drop-shadow(0 1px 2px rgba(255, 255, 255, 0.1));
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  .month-decor-particle svg {
+    filter: 
+      drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3))
+      drop-shadow(0 1px 3px rgba(255, 255, 255, 0.2))
+      brightness(1.1);
+  }
+  body{
+    background-color: black;
+  }
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .month-decor-particle {
+    animation-duration: calc(var(--month-decor-duration, 10s) * 0.7) !important;
+  }
+  
+  .month-decor-particle svg {
+    filter: 
+      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1))
+      drop-shadow(0 0.5px 1px rgba(255, 255, 255, 0.1));
+  }
+}
+
+/* Accesibilidad - reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .month-decor-particle {
+    animation: none !important;
+    opacity: 0.3 !important;
+    transform: translateY(0) rotate(0) !important;
+  }
+}
+
+/* Alto contraste */
+@media (prefers-contrast: high) {
+  .month-decor-particle svg {
+    filter: none;
+  }
+}
